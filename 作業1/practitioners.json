@@ -1,0 +1,14 @@
+{
+  "resourceType": "PractitionerRole",
+  "id": "10327278",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2023-04-20T18:14:33.452+00:00",
+    "source": "#DFD24k4pzenqWk0T"
+  },
+  "identifier": [ {
+    "system": "http://www.acme.org/practitioners",
+    "value": "23"
+  } ],
+  "active": true
+}

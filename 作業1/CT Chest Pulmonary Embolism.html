@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>CT Chest Pulmonary Embolism</title>
+</head>
+
+
+<body>
+  <section data-section-name="Findings">
+    <header class="level1">Findings</header>
+    <p><label for="T116_13">Diagnostic quality: </label>
+      <select id="T116_13" name="Diagnostic quality">
+        <option id="T116_14" name="Adequate" value="Adequate">Adequate</option>
+        <option id="T116_15" name="Suboptimal" value="Suboptimal">Suboptimal</option>
+        <option id="T116_16" name="Nondiagnostic" value="Nondiagnostic">Nondiagnostic</option>
+      </select>
+    </p>
+    <p><label for="T116_18">Pulmonary embolism:</label><input type="text" id="T116_18" name="Pulmonary embolism"
+        value="None. " /></p>
+    <p><label for="T116_101">Right heart strain:</label><input type="text" id="T116_101" name="Right heart strain"
+        value="None. " /></p>
+    <p><label for="T116_100">Pulmonary arteries:</label><input type="text" id="T116_100" name="Pulmonary arteries"
+        value="Normal in caliber. " /></p>
+    <p><label for="T116_21">Lung parenchyma: </label><input type="text" id="T116_21" name="Lung parenchyma"
+        value="Normal. " /></p>
+    <p><label for="T116_23">Pleural effusion: </label><input type="text" id="T116_23" name="Pleural effusion"
+        value="None. " /></p>
+    <p><label for="T116_25">Central airways: </label><input type="text" id="T116_25" name="Central airways"
+        value="Normal. " /></p>
+    <p><label for="T116_27">Adenopathy: </label><input type="text" id="T116_27" name="Adenopathy" value="None. " /></p>
+    <p><label for="T116_29">Heart and great vessels: </label><input type="text" id="T116_29" name="Heart"
+        value="Normal. " /></p>
+    <p><label for="T116_31">Upper abdomen: </label><input type="text" id="T116_31" name="Upper abdomen"
+        value="Normal. " /></p>
+    <p><label for="T116_33">Bones: </label><input type="text" id="T116_33" name="Bones" value="Normal. " /></p>
+  </section>
+  <section data-section-name="Impression">
+    <header class="level1">Impression</header>
+    <p><textarea id="T116_35" name="Impression">No acute or chronic pulmonary embolism. </textarea></p>
+  </section>
+  <button onclick="myFunction();">Submit</button>
+  <script src='FindingObservation.js'></script>
+  <script src='setting.js'></script>
+  <script>
+    
+    function myFunction() {
+
+      FindingObservation.component[1].valueString = document.getElementsByName("Diagnostic quality")[0].value;
+      FindingObservation.component[2].valueString = document.getElementsByName("Pulmonary embolism")[0].value;
+      FindingObservation.component[3].valueString = document.getElementsByName("Right heart strain")[0].value;
+      FindingObservation.component[4].valueString = document.getElementsByName("Pulmonary arteries")[0].value;
+      FindingObservation.component[5].valueString = document.getElementsByName("Lung parenchyma")[0].value;
+      FindingObservation.component[6].valueString = document.getElementsByName("Pleural effusion")[0].value;
+      FindingObservation.component[7].valueString = document.getElementsByName("Central airways")[0].value;
+      FindingObservation.component[8].valueString = document.getElementsByName("Adenopathy")[0].value;
+      FindingObservation.component[9].valueString = document.getElementsByName("Heart")[0].value;
+      FindingObservation.component[10].valueString = document.getElementsByName("Upper abdomen")[0].value;
+      FindingObservation.component[11].valueString = document.getElementsByName("Bones")[0].value;
+      FindingObservation.component[12].valueString = document.getElementsByName("Impression")[0].value;
+      
+      postData(FindingObservation, "Observation")
+    }
+    function postData(jsonString, type) {
+      alert("Posting!")
+      var xhttp = new XMLHttpRequest();
+      var url = fhirUrl + "/" + type;
+      xhttp.open("POST", url, false);
+      xhttp.setRequestHeader("Content-type", 'application/json+fhir');
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) // && this.status == 201) 
+        {
+          ret = JSON.parse(this.responseText);
+          alert(this.responseText);
+        }
+      };
+      var data = JSON.stringify(jsonString);
+      xhttp.send(data);
+    }
+
+  </script>
+</body>
+
+</html>
